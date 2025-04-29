@@ -1,0 +1,4 @@
+rootProject.name = 'stock-managment'
+
+include 'products-service'
+include 'api-gateway'
