@@ -1,27 +1,20 @@
-package com.example.productservice.model;
+package com.example.cartservice.dto;
 
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-@Table("products")
-public class Product {
-  @Id
+public class GetProductDTO {
   private Long id;
   private String name;
   private String description;
   private Integer stock;
 
-  public Product() {
-  }
-
-  public Product(Long id, String name, String description, Integer stock) {
+  public GetProductDTO(Long id, String name, String description, Integer stock) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.stock = stock;
   }
 
+  public GetProductDTO() {
+  }
 
   public Long getId() {
     return id;

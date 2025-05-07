@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS carts(
+    cart_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_email VARCHAR(40) UNIQUE NOT NULL,
+    created_date DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS products (
+    product_id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(200) NOT NULL,
+    quantity INT NOT NULL,
+    cart_id BIGINT NOT NULL,
+    FOREIGN KEY(cart_id) REFERENCES carts(cart_id) ON DELETE CASCADE
+);
+

@@ -3,8 +3,8 @@ package com.example.productservice.service;
 import com.example.productservice.model.Product;
 import com.example.productservice.repository.IProductRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
 public class ProductService {
@@ -14,7 +14,13 @@ public class ProductService {
     this.productRepository = productRepository;
   }
 
-  public List<Product> getAll() {
+  public Flux<Product> getAll() {
     return productRepository.findAll();
+  }
+
+  public Mono<Product> getById(Long productId) {
+    return productRepository
+      .findById(productId)
+      .switchIfEmpty(Mono.error(new RuntimeException("Product not found")));
   }
 }

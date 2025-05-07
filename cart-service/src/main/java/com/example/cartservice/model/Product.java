@@ -1,27 +1,30 @@
-package com.example.productservice.model;
-
+package com.example.cartservice.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("products")
 public class Product {
   @Id
+  @Column("product_id")
   private Long id;
   private String name;
   private String description;
-  private Integer stock;
+  private Integer quantity;
+  @Column("cart_id")
+  private Long cartId;
 
   public Product() {
   }
 
-  public Product(Long id, String name, String description, Integer stock) {
+  public Product(Long id, String name, String description, Integer quantity, Long cartId) {
     this.id = id;
     this.name = name;
     this.description = description;
-    this.stock = stock;
+    this.quantity = quantity;
+    this.cartId = cartId;
   }
-
 
   public Long getId() {
     return id;
@@ -47,11 +50,19 @@ public class Product {
     this.description = description;
   }
 
-  public Integer getStock() {
-    return stock;
+  public Integer getQuantity() {
+    return quantity;
   }
 
-  public void setStock(Integer stock) {
-    this.stock = stock;
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
+
+  public Long getCartId() {
+    return cartId;
+  }
+
+  public void setCartId(Long cartId) {
+    this.cartId = cartId;
   }
 }

@@ -1,27 +1,20 @@
-package com.example.productservice.model;
+package com.example.notificationsservice.model;
 
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
-
-@Table("products")
 public class Product {
-  @Id
   private Long id;
   private String name;
   private String description;
-  private Integer stock;
+  private Integer quantity;
 
-  public Product() {
-  }
-
-  public Product(Long id, String name, String description, Integer stock) {
+  public Product(Long id, String name, String description, Integer quantity) {
     this.id = id;
     this.name = name;
     this.description = description;
-    this.stock = stock;
+    this.quantity = quantity;
   }
 
+  public Product() {
+  }
 
   public Long getId() {
     return id;
@@ -47,11 +40,11 @@ public class Product {
     this.description = description;
   }
 
-  public Integer getStock() {
-    return stock;
+  public Integer getQuantity() {
+    return quantity;
   }
 
-  public void setStock(Integer stock) {
-    this.stock = stock;
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
   }
 }
