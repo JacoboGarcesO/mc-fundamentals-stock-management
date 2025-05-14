@@ -18,20 +18,17 @@ import reactor.core.publisher.Mono;
 public class CartService {
   private final ICartRepository cartRepository;
   private final IProductRepository productRepository;
-  private final WebClient.Builder webClientBuilder;
-  private final String productsServiceUrl;
+  private final GetProductClient getProductClient;
   private final CartEventPublisher cartEventPublisher;
 
   public CartService(
     ICartRepository cartRepository,
     IProductRepository productRepository,
-    WebClient.Builder webClientBuilder,
-    @Value("${product.service.url}") String productsServiceUrl,
+    GetProductClient getProductClient,
     CartEventPublisher cartEventPublisher) {
     this.cartRepository = cartRepository;
     this.productRepository = productRepository;
-    this.webClientBuilder = webClientBuilder;
-    this.productsServiceUrl = productsServiceUrl;
+    this.getProductClient = getProductClient;
     this.cartEventPublisher = cartEventPublisher;
   }
 
@@ -54,7 +51,7 @@ public class CartService {
   }
 
   public Mono<CartDTO> addProduct(AddProductDTO addProductDTO, String userEmail) {
-    return getProduct(addProductDTO.getProductId())
+    return getProductClient.getProduct(addProductDTO.getProductId())
       .flatMap(product -> {
         if (product.getStock() < addProductDTO.getQuantity()) {
           return Mono.error(new RuntimeException("Not enough stock"));
@@ -70,15 +67,5 @@ public class CartService {
               .map(products -> new CartDTO(cart.getId(), userEmail, cart.getCreatedDate(), products))
             ));
       });
-  }
-
-  private Mono<GetProductDTO> getProduct(Long productId) {
-    return webClientBuilder
-      .build()
-      .get()
-      .uri(productsServiceUrl + "/api/products/" + productId)
-      .retrieve()
-      .onStatus(status -> status.is4xxClientError(), response -> Mono.error(new RuntimeException("Product not found")))
-      .bodyToMono(GetProductDTO.class);
   }
 }
