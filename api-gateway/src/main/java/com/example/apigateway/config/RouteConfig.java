@@ -36,6 +36,10 @@ public class RouteConfig {
          .path("/api/accounts/**")
          .filters(f -> f.filter(filter))
          .uri("http://localhost:8085"))
+      .route("transactions-service-route", route -> route
+         .path("/api/transactions/**")
+         .filters(f -> f.filter(filter))
+         .uri("http://localhost:8086"))
       .build();
   }
 }
