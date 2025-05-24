@@ -1,4 +1,4 @@
-package com.bankservice.service;
+package com.accountservice.service;
 
 import com.bankservice.model.Bank;
 import com.bankservice.repository.BankRepository;

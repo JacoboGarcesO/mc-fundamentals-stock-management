@@ -16,7 +16,7 @@ public class Transaction {
     @Id
     private String id;
     private String accountId;
-    private String type; // "deposit" or "withdrawal"
+    private String type;
     private double amount;
     private LocalDateTime timestamp;
 }

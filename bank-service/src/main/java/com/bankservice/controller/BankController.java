@@ -2,7 +2,7 @@
 package com.bankservice.controller;
 
 import com.bankservice.model.Bank;
-import com.bankservice.service.BankService;
+import com.accountservice.service.BankService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
