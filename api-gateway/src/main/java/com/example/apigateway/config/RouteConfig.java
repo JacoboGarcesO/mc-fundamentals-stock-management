@@ -28,6 +28,18 @@ public class RouteConfig {
       .route("auth-service-route", route -> route
         .path("/api/auth/**")
         .uri("http://localhost:8084"))
+      .route("bank-service-route", route -> route
+        .path("/api/banks/**")
+        .filters(f -> f.filter(filter))
+        .uri("http://localhost:8083"))
+      .route("accounts-service-route", route -> route
+         .path("/api/accounts/**")
+         .filters(f -> f.filter(filter))
+         .uri("http://localhost:8085"))
+      .route("transactions-service-route", route -> route
+         .path("/api/transactions/**")
+         .filters(f -> f.filter(filter))
+         .uri("http://localhost:8086"))
       .build();
   }
 }
